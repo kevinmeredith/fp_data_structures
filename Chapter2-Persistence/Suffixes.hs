@@ -1,0 +1,2 @@
+suffixes :: [a] -> [[a]]
+suffixes
