@@ -29,7 +29,7 @@ member x (Node y left right)
 -- TODO: am I doing that by re-using `comparison`?
 
 -- Exercise 2.5
--- make a `complete a Int` function that creates a tree of 
+-- Part a: make a `complete a Int` function that creates a tree of 
 -- depth Int, putting a in every leaf of the tree.
 -- TODO: does it run in O(d) time? 
 complete :: a -> Integer -> Maybe (Tree a)
@@ -39,4 +39,6 @@ complete x depth
                         where complete' d 
                                 | d == 0    = Empty
                                 | otherwise = let copiedTree = complete' (d-1) 
-                                              in Node x copiedTree copiedTree
+                                              in Node x copiedTree copied
+
+-- Part B: Re-visit once discuss `complete`
