@@ -18,6 +18,16 @@ member x (Node y left right)
       | otherwise        = True
       where comparison = compare x y
 
+-- #hacphi
+-- re-write to use `case` for the comparison
+-- Danny explained that we can check for <= only
+
+member' :: (Ord a) => a -> Tree a -> Bool
+member' _ Empty           = False
+member' x (Node y left right) = case (compare x y) of 
+                                     LT -> member' x left
+                                     GT -> member' x right
+                                     EQ -> True
 -- Exercise 2.2
 -- worst case of `member` is 2*d comparions.
 -- re-write member to take no more than d+1 comparisons by 
@@ -32,13 +42,13 @@ member x (Node y left right)
 -- Part a: make a `complete a Int` function that creates a tree of 
 -- depth Int, putting a in every leaf of the tree.
 -- TODO: does it run in O(d) time? 
-complete :: a -> Integer -> Maybe (Tree a)
-complete x depth 
- | depth < 0  = Nothing
- | otherwise  = Just $ complete' depth
-                        where complete' d 
-                                | d == 0    = Empty
-                                | otherwise = let copiedTree = complete' (d-1) 
-                                              in Node x copiedTree copied
+--complete :: a -> Integer -> Maybe (Tree a)
+--complete x depth 
+-- | depth < 0  = Nothing
+-- | otherwise  = Just $ complete' depth
+--                        where complete' d 
+--                                | d == 0    = Empty
+--                                | otherwise = let copiedTree = complete' (d-1) 
+--                                              in Node x copiedTree copied
 
 -- Part B: Re-visit once discuss `complete`
