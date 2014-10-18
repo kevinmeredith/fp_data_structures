@@ -23,7 +23,7 @@ member x (Node y left right)
 -- Danny explained that we can check for <= only
 
 member' :: (Ord a) => a -> Tree a -> Bool
-member' _ Empty           = False
+member' _ Empty               = False
 member' x (Node y left right) = case (compare x y) of 
                                      LT -> member' x left
                                      GT -> member' x right
