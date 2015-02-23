@@ -18,6 +18,13 @@ member x (Node y left right)
       | otherwise        = True
       where comparison = compare x y
 
+memberFromBook :: (Ord a) => a -> Tree a -> Bool
+memberFromBook x Empty               = False
+memberFromBook x (Node y left right) 
+  | (x < y)   = memberFromBook x left
+  | (x > y)   = memberFromBook x right
+  | otherwise = True
+
 -- #hacphi
 -- re-write to use `case` for the comparison
 -- Danny explained that we can check for <= only
@@ -36,7 +43,15 @@ member' x (Node y left right) = case (compare x y) of
 -- < returned false or <= returned true) and checking for 
 -- equality only at the bottom of the Tree
 
--- TODO: am I doing that by re-using `comparison`?
+type NumberComparisons = Int
+
+memberShort :: (Ord a) => a -> Tree a -> (Bool, NumberComparisons)
+memberShort x tree = go x tree Nothing 0
+  where
+    go x Empty cand comps               = case cand of Nothing  -> (False, comps)
+                                                       (Just y) -> (x == y, comps)
+    go x (Node y left right) cand comps = if (x <= y) then (go x left (Just y) (comps+1)) 
+                                          else (go x right cand (comps+1))
 
 -- Exercise 2.5
 -- Part a: make a `complete a Int` function that creates a tree of 
