@@ -77,7 +77,7 @@ insertShort x tree = go x tree Nothing
 -- Exercise 2.5
 -- Part a: make a `complete a Int` function that creates a tree of 
 -- depth Int, putting a in every leaf of the tree.
--- TODO: does it run in O(d) time? 
+-- see http://stackoverflow.com/questions/28710261/function-to-populate-tree-in-odepth
 complete :: a -> Integer -> Maybe (Tree a)
 complete x depth 
  | depth < 0  = Nothing
